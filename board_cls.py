@@ -25,6 +25,11 @@ class SquarePuzzleBoard:
 
 
     def create_solution_board(self) -> np.array:
+        """
+        Creates an array that is the solution to the board
+        :return: n by n dimensional np.array with numbers in order from 1 to n**2 - 1 and the last element being 0 to
+                indicate the empty square
+        """
         return np.array([i for i in range(1, self._n ** 2)] + [0]).reshape((self._n, -1))
 
 
@@ -36,13 +41,20 @@ class SquarePuzzleBoard:
         :return square_positions: numpy array of randomly initialised board
         """
         self._square_positions = self._solution_board.copy()
-        # square_positions = np.array([i for i in range(1, self.n + 1)] + [0] + [i for i in range(self.n + 1, self.n**2)]).reshape((self.n, -1))
         for _ in range(self._num_shuffle_moves):
             move = random.choice(self.valid_moves())
             self.make_move(move)
+        self._board_initialised = True
 
 
     def make_move(self, move_tuple: tuple):
+        """
+        Takes in a tuple of format (row, column) indicating the square that should be moved into the empty space. Checks
+        the move is valid and uf so updates the board. Otherwise prints an 'Invalid move' message to the user and leaves
+        board as is.
+        :param move_tuple:
+        :return:
+        """
         if move_tuple in self.valid_moves():
             row = move_tuple[0]
             col = move_tuple[1]
@@ -50,19 +62,14 @@ class SquarePuzzleBoard:
             self._square_positions[self._square_positions == 0] = number_moved
             self._square_positions[row, col] = 0
 
-            self.present_board()
-
         else:
-            print('Invalid move') #TODO: check this isn't repeated
+            print(f'Invalid move, please choose from these valid squares to move:\n{self.valid_moves()}')
 
-
-    def check_move_valid(self):
-        pass
 
 
     def valid_moves(self) -> list:
         """
-        Returns a list of valis moves, each move a tuple of format (row, column)
+        Returns a list of valid moves, each move a tuple of format (row, column)
         :return valid_moves: a list of valid moves
         """
         empty_row, empty_col = [i[0] for i in np.where(self._square_positions == 0)]
@@ -84,11 +91,18 @@ class SquarePuzzleBoard:
 
 
     def check_board_solved(self) -> bool:
-
+        """
+        Checks board against solution and returns True if hey are the same. Returns False if different.
+        :return:
+        """
         return np.all(self._square_positions == self._solution_board)
 
 
     def present_board(self):
+        """
+        Prints a prettily formatted board
+        :return:
+        """
         board_str = ''
         board_str += ' ' + (self._max_char_len + 3) * self._n * '-' + '-\n'
         for i in range(self._n):
@@ -97,15 +111,3 @@ class SquarePuzzleBoard:
             board_str += ' |\n'
             board_str += ' ' + (self._max_char_len + 3) * self._n * '-' + '-\n'
         print(board_str)
-
-
-    def move_input_checker(self):
-        pass
-
-if __name__ == '__main__':
-    # TODO: docstring everything
-    board = SquarePuzzleBoard(4)
-    print(board._square_positions)
-    print(board.valid_moves())
-    print(board._max_char_len)
-    board.present_board()
