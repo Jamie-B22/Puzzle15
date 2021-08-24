@@ -15,6 +15,7 @@ class SquarePuzzleBoard:
         """
         self.n = n
         self.square_positions = self.starting_board()
+        self.max_char_len = len(str(self.square_positions.max()))
 
     def starting_board(self) -> np.array:
         """
@@ -60,7 +61,14 @@ class SquarePuzzleBoard:
         pass
 
     def present_board(self):
-        pass
+        board_str = ''
+        board_str += ' ' + (self.max_char_len + 3) * self.n * '-' + '-\n'
+        for i in range(self.n):
+            for j in range(self.n):
+                board_str += ' | ' + str(self.square_positions[i,j]).rjust(self.max_char_len)
+            board_str += ' |\n'
+            board_str += ' ' + (self.max_char_len + 3)* self.n * '-' + '-\n'
+        print(board_str)
 
     def move_input_checker(self):
         pass
@@ -69,4 +77,5 @@ if __name__ == '__main__':
     board = SquarePuzzleBoard(4)
     print(board.square_positions)
     print(board.valid_moves())
-
+    print(board.max_char_len)
+    board.present_board()
