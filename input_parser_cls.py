@@ -10,10 +10,33 @@ class InputParser:
         self._n_board_cols = n_board_cols
 
     def get_move_tuple_from_user(self) -> tuple:
-        pass
+        row = self._get_valid_row_input()
+        col = self._get_valid_col_input()
+        return row, col
 
-    def _check_row_input(self):
-        pass
+    def _get_valid_row_input(self) -> int:
+        ask_for_input = True
+        while ask_for_input:
+            row = input(
+                f'Please enter the row of the square you would like to move. Rows are from 0 to {self._n_board_rows}, \
+                starting with 0 as the top row.')
 
-    def _check_col_input(self):
-        pass
+            if row < self._n_board_rows and row >= 0:
+                ask_for_input = False
+            else:
+                print('Please enter a valid row.')
+        return row
+
+
+    def _check_col_input(self) -> int:
+        ask_for_input = True
+        while ask_for_input:
+            col = input(
+                f'Please enter the column of the square you would like to move. columns are from 0 to \
+                {self._n_board_cols}, starting with 0 as the top column.')
+
+            if col < self._n_board_rows and col >= 0:
+                ask_for_input = False
+            else:
+                print('Please enter a valid column.')
+        return col
