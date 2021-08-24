@@ -8,7 +8,8 @@ from input_parser_cls import InputParser
 
 
 
-
+# TODO: move all into some sort of game class
+# TODO: write a load of tests for the game class, how do you mock up system input?
 if __name__ == '__main__':
     board = SquarePuzzleBoard(SQUARE_BOARD_SIDE_LENGTH)
     rows, cols = board.board_side_length, board.board_side_length
