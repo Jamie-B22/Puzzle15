@@ -20,8 +20,9 @@ class SquarePuzzleBoard:
         self._n = n
         self._num_shuffle_moves = num_shuffle_moves
         self._solution_board = self.create_solution_board()
+        self._max_char_len = len(str(self._solution_board.max()))
         self.create_starting_board()
-        self._max_char_len = len(str(self._square_positions.max()))
+
 
     def create_solution_board(self) -> np.array:
         return np.array([i for i in range(1, self._n ** 2)] + [0]).reshape((self._n, -1))

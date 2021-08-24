@@ -44,7 +44,7 @@ class TestSquarePuzzleBoard(unittest.TestCase):
         board = SquarePuzzleBoard(n)
         board._square_positions = np.array([[1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12], [13, 14, 15, 0]])
         board.make_move((n - 2, n - 1))
-        # valid move, board should have moved
+        # valid move, board shoul have moved
         current_board = np.array([[ 1, 2, 3, 4], [ 5, 6, 7, 8], [ 9, 10, 11, 0], [13, 14, 15, 12]])
         self.assertTrue(np.all(board._square_positions == current_board))
         board.make_move((n - 2, n - 1))
