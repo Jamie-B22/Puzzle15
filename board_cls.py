@@ -14,10 +14,14 @@ class SquarePuzzleBoard:
         :return:
         """
         self.n = n
-        self.square_positions = self.starting_board()
+        self.solution_board = self.create_solution_board()
+        self.square_positions = self.create_starting_board()
         self.max_char_len = len(str(self.square_positions.max()))
 
-    def starting_board(self) -> np.array:
+    def create_solution_board(self) -> np.array:
+        return np.array([i for i in range(1, self.n**2)] + [0]).reshape((self.n,-1))
+
+    def create_starting_board(self) -> np.array:
         """
         Randomly initialise a solvable board. The initialisation is done through random moves from a solved board to
         ensure a solution exists as only half of all permutations are solvable
@@ -57,8 +61,9 @@ class SquarePuzzleBoard:
 
         return valid_moves
 
-    def check_board_solved(self):
-        pass
+    def check_board_solved(self) -> bool:
+
+        return np.all(self.square_positions == self.solution_board)
 
     def present_board(self):
         board_str = ''
