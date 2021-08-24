@@ -3,41 +3,45 @@
     Class to create puzzle board instances.
 """
 import numpy as np
+import random
 
 class SquarePuzzleBoard:
     """
     Note that 0 is used to indicate the blank square
     """
 
-    def __init__(self, n):
+    def __init__(self, n: int, num_shuffle_moves: int = 10):
         """
         Build board with squares in a random solvable starting position
-        :param n: board side length in squares
+        :param n: int, board side length in squares
+        :param num_shuffle_moves: int, number of moves to shuffle initial board by
         :return:
         """
         self._n = n
+        self._num_shuffle_moves = num_shuffle_moves
         self._solution_board = self.create_solution_board()
-        self._square_positions = self.create_starting_board()
+        self.create_starting_board()
         self._max_char_len = len(str(self._square_positions.max()))
 
     def create_solution_board(self) -> np.array:
         return np.array([i for i in range(1, self._n ** 2)] + [0]).reshape((self._n, -1))
 
 
-    def create_starting_board(self) -> np.array:
+    def create_starting_board(self):
         """
         Randomly initialise a solvable board. The initialisation is done through random moves from a solved board to
         ensure a solution exists as only half of all permutations are solvable
         (see https://en.wikipedia.org/wiki/15_puzzle for more info on this)
         :return square_positions: numpy array of randomly initialised board
         """
-        square_positions = np.array([i for i in range(1, self._n ** 2)] + [0]).reshape((self._n, -1))
+        self._square_positions = self._solution_board.copy()
         # square_positions = np.array([i for i in range(1, self.n + 1)] + [0] + [i for i in range(self.n + 1, self.n**2)]).reshape((self.n, -1))
-        # TODO: randomly shuffle
-        return square_positions
+        for _ in range(self._num_shuffle_moves):
+            move = random.choice(self.valid_moves())
+            self.make_move(move)
 
 
-    def move(self, move_tuple):
+    def make_move(self, move_tuple: tuple):
         if move_tuple in self.valid_moves():
             row = move_tuple[0]
             col = move_tuple[1]
