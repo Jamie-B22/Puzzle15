@@ -24,6 +24,7 @@ class SquarePuzzleBoard:
         :return square_positions: numpy array of randomly initialised board
         """
         square_positions = np.array([i for i in range(1, self.n**2)] + [0]).reshape((self.n,-1))
+        # square_positions = np.array([i for i in range(1, self.n + 1)] + [0] + [i for i in range(self.n + 1, self.n**2)]).reshape((self.n, -1))
         # TODO: randomly shuffle
         return square_positions
 
@@ -33,8 +34,27 @@ class SquarePuzzleBoard:
     def check_move_valid(self):
         pass
 
-    def valid_moves(self):
-        pass
+    def valid_moves(self) -> list:
+        """
+        Returns a list of valis moves, each move a tuple of format (row, column, direction)
+        :return valid_moves: a list of valid moves
+        """
+        empty_row, empty_col = [i[0] for i in np.where(self.square_positions == 0)]
+        valid_moves = []
+        if empty_row > 0:
+            down_move = (empty_row - 1, empty_col, 'd')
+            valid_moves.append(down_move)
+        if empty_row < self.n - 1:
+            up_move = (empty_row + 1, empty_col, 'u')
+            valid_moves.append(up_move)
+        if empty_col > 0:
+            right_move = (empty_row, empty_col - 1, 'r')
+            valid_moves.append(right_move)
+        if empty_col < self.n - 1:
+            left_move = (empty_row, empty_col + 1, 'l')
+            valid_moves.append(left_move)
+
+        return valid_moves
 
     def check_board_solved(self):
         pass
@@ -42,6 +62,11 @@ class SquarePuzzleBoard:
     def present_board(self):
         pass
 
+    def move_input_checker(self):
+        pass
+
 if __name__ == '__main__':
     board = SquarePuzzleBoard(4)
     print(board.square_positions)
+    print(board.valid_moves())
+
