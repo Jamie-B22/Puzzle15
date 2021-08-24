@@ -1,10 +1,17 @@
+"""
+    Author: Jamie Bamforth
+    Tests code in board_cls.py
+"""
+
 import unittest
 import numpy as np
 from board_cls import SquarePuzzleBoard
 
+# TODO: comment all this
+
 class TestSquarePuzzleBoard(unittest.TestCase):
     def test_init(self):
-        pass
+        pass #TODO: implement
 
     def test_valid_moves(self):
         n = 4
