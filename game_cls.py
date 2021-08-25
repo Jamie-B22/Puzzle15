@@ -5,7 +5,7 @@
 
 
 class PuzzleGame:
-    def __init__(self, board, parser):
+    def __init__(self, board: object, parser: object):
         """
         Initialise a puzzle game with the relevant board and input parser
         :param board: an instance of the relevant puzzle board
@@ -19,7 +19,9 @@ class PuzzleGame:
         Prints an intro message and instructions for the user
         :return:
         """
-        print(f"Welcome to the Puzzle{self.board.board_side_length**2 - 1} board challenge!\n")
+        print(
+            f"Welcome to the Puzzle{self.board.board_side_length**2 - 1} board challenge!\n"
+        )
         print(
             f"You will see a board below with {self.board.board_side_length**2} squares containing numbers 1 to {self.board.board_side_length**2 - 1} and an empty square, all randomly mixed."
         )

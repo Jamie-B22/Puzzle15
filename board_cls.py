@@ -11,7 +11,7 @@ class SquarePuzzleBoard:
     Note that 0 is used to indicate the blank square
     """
 
-    def __init__(self, board_side_length: int, num_shuffle_moves: int = 10):
+    def __init__(self, board_side_length: int, num_shuffle_moves: int = 100):
         """
         Build board with squares in a random solvable starting position
         :param n: int, board side length in squares
@@ -64,7 +64,7 @@ class SquarePuzzleBoard:
 
         else:
             print(
-                f"Invalid move, please choose from these valid squares to move:\n{self.valid_moves()}"
+                f"\nInvalid move, please choose from these valid squares to move:\n{self.valid_moves()}"
             )
 
     def valid_moves(self) -> list:
