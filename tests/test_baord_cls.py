@@ -7,7 +7,6 @@ import unittest
 import numpy as np
 from board_cls import SquarePuzzleBoard
 
-# TODO: comment all this
 
 
 class TestSquarePuzzleBoard(unittest.TestCase):

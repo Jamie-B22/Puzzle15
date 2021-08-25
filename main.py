@@ -7,7 +7,6 @@ from board_cls import SquarePuzzleBoard
 from input_parser_cls import InputParser
 from game_cls import PuzzleGame
 
-# TODO: write a load of tests, how do you mock up system input?
 def create_game() -> PuzzleGame:
     board = SquarePuzzleBoard(SQUARE_BOARD_SIDE_LENGTH)
     rows, cols = board.board_side_length, board.board_side_length
