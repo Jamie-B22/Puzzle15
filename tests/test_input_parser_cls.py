@@ -8,10 +8,11 @@ import unittest
 
 # TODO: comment all this
 
+
 class TestInputParser(unittest.TestCase):
     def test_init(self):
-        pass #TODO: implement
+        pass  # TODO: implement
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()

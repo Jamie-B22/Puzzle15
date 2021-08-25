@@ -5,6 +5,7 @@
 import numpy as np
 import random
 
+
 class SquarePuzzleBoard:
     """
     Note that 0 is used to indicate the blank square
@@ -23,15 +24,15 @@ class SquarePuzzleBoard:
         self._max_char_len = len(str(self._solution_board.max()))
         self.create_starting_board()
 
-
     def create_solution_board(self) -> np.array:
         """
         Creates an array that is the solution to the board
         :return: n by n dimensional np.array with numbers in order from 1 to n**2 - 1 and the last element being 0 to
                 indicate the empty square
         """
-        return np.array([i for i in range(1, self.board_side_length ** 2)] + [0]).reshape((self.board_side_length, -1))
-
+        return np.array(
+            [i for i in range(1, self.board_side_length ** 2)] + [0]
+        ).reshape((self.board_side_length, -1))
 
     def create_starting_board(self):
         """
@@ -45,7 +46,6 @@ class SquarePuzzleBoard:
             move = random.choice(self.valid_moves())
             self.make_move(move)
         self._board_initialised = True
-
 
     def make_move(self, move_tuple: tuple):
         """
@@ -63,9 +63,9 @@ class SquarePuzzleBoard:
             self._square_positions[row, col] = 0
 
         else:
-            print(f'Invalid move, please choose from these valid squares to move:\n{self.valid_moves()}')
-
-
+            print(
+                f"Invalid move, please choose from these valid squares to move:\n{self.valid_moves()}"
+            )
 
     def valid_moves(self) -> list:
         """
@@ -89,7 +89,6 @@ class SquarePuzzleBoard:
 
         return valid_moves
 
-
     def check_board_solved(self) -> bool:
         """
         Checks board against solution and returns True if hey are the same. Returns False if different.
@@ -97,17 +96,24 @@ class SquarePuzzleBoard:
         """
         return np.all(self._square_positions == self._solution_board)
 
-
     def present_board(self):
         """
         Prints a prettily formatted board
         :return:
         """
-        board_str = ''
-        board_str += ' ' + (self._max_char_len + 3) * self.board_side_length * '-' + '-\n'
+        board_str = ""
+        board_str += (
+            " " + (self._max_char_len + 3) * self.board_side_length * "-" + "-\n"
+        )
         for i in range(self.board_side_length):
             for j in range(self.board_side_length):
-                board_str += ' | ' + (str(self._square_positions[i, j]).rjust(self._max_char_len) if self._square_positions[i, j] != 0 else self._max_char_len * ' ')
-            board_str += ' |\n'
-            board_str += ' ' + (self._max_char_len + 3) * self.board_side_length * '-' + '-\n'
+                board_str += " | " + (
+                    str(self._square_positions[i, j]).rjust(self._max_char_len)
+                    if self._square_positions[i, j] != 0
+                    else self._max_char_len * " "
+                )
+            board_str += " |\n"
+            board_str += (
+                " " + (self._max_char_len + 3) * self.board_side_length * "-" + "-\n"
+            )
         print(board_str)
