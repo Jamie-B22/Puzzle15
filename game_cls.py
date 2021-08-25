@@ -5,7 +5,7 @@
 
 
 class PuzzleGame:
-    def __init__(self, board, parser):
+    def __init__(self, board: object, parser: object):
         """
         Initialise a puzzle game with the relevant board and input parser
         :param board: an instance of the relevant puzzle board

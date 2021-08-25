@@ -5,42 +5,37 @@
 
 
 class InputParser:
-    def __init__(self, n_board_rows, n_board_cols):
+    def __init__(self, n_board_rows: int, n_board_cols: int):
         self._n_board_rows = n_board_rows
         self._n_board_cols = n_board_cols
 
     def get_move_tuple_from_user(self) -> tuple:
-        row = self._get_valid_row_input()
-        col = self._get_valid_col_input()
+        """
+        Get the input from the user and return a move tuple
+        :return: move tuple format (row, column)
+        """
+        row = self._get_valid_int_input("row", self._n_board_rows)
+        col = self._get_valid_int_input("column", self._n_board_cols)
         return row, col
 
-    def _get_valid_row_input(self) -> int:
-        # TODO: check if alpha value
+
+    def _get_valid_int_input(self, type: str, dimension_size: int) -> int:
+        """
+        Takes a type string to inform the user in the input message and returns a valid integer from user input
+        :param type: string of value 'row' or 'column'
+        :param dimension_size: number of possible integers to give an upper limit
+        :return: integer of input given
+        """
         ask_for_input = True
         while ask_for_input:
-            row = int(
-                input(
-                    f"Please enter the row of the square you would like to move. Rows are from 0 to {self._n_board_rows-1}, starting with 0 as the top row.\nRow: "
+            num = input(
+                    f"Please enter the {type} of the square you would like to move. {type.title()}s are from 0 to {dimension_size - 1}, starting from top left.\n{type}: "
                 )
-            )
-
-            if row < self._n_board_rows and row >= 0:
-                ask_for_input = False
+            if not num.isnumeric():
+                # check first and separately to prevent an exception being thrown on int() type conversion
+                print(f"Please enter a valid {type}.")
+            elif int(num) >= dimension_size or int(num) < 0:
+                print(f"Please enter a valid {type}.")
             else:
-                print("Please enter a valid row.")
-        return row
-
-    def _get_valid_col_input(self) -> int:
-        ask_for_input = True
-        while ask_for_input:
-            col = int(
-                input(
-                    f"Please enter the column of the square you would like to move. Columns are from 0 to {self._n_board_cols-1}, starting with 0 as the top column.\nColumn: "
-                )
-            )
-
-            if col < self._n_board_rows and col >= 0:
                 ask_for_input = False
-            else:
-                print("Please enter a valid column.")
-        return col
+        return int(num)
