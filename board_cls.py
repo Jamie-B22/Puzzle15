@@ -11,7 +11,7 @@ class PuzzleBoard:
     Note that 0 is used to indicate the blank square
     """
 
-    def __init__(self, rows: int, cols: int, num_shuffle_moves: int = 100):
+    def __init__(self, rows: int, cols: int, num_shuffle_moves: int = 3):
         """
         Build board with squares in a random solvable starting position
         :param rows: int, number of board rows

@@ -20,16 +20,17 @@ class PuzzleGame:
         :return:
         """
         print(
-            f"Welcome to the Puzzle{self.board.rows*self.board.cols - 1} board challenge!\n"
+            f"Welcome to the Puzzle{self.board.rows*self.board.cols - 1} board challenge!"
         )
         print(
-            f"You will see a board below with {self.board.rows*self.board.cols**2} squares containing numbers 1 to {self.board.rows*self.board.cols - 1} and an empty square, all randomly mixed."
+            f"\nYou will see a board below with {self.board.rows*self.board.cols**2} squares containing numbers 1 to {self.board.rows*self.board.cols - 1} and an empty square, all randomly mixed."
         )
         print(
-            "Your task is to slide adjacent squares into the empty square until you end up with the numbers in order, left to right, top to bottom with the empty square in the bottom right.\n"
+            "Your task is to slide adjacent squares into the empty square until you end up with the numbers in order, left to right, top to bottom with the empty square in the bottom right."
         )
-        print("Good luck!\n")
-        print("#####################################\n")
+        print("Please note that the top left square has index 0, 0, not index 1, 1!")
+        print("\nGood luck!")
+        print("\n#####################################\n")
 
     def play_game(self):
         """
@@ -50,4 +51,4 @@ class PuzzleGame:
         """
         print("\n\n****************** Well Done! ******************\n")
         self.board.present_board()
-        print("\n************************************************")
+        print("****************** Well Done! ******************")
