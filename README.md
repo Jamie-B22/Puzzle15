@@ -11,6 +11,6 @@ The game can be run from the terminal by executing the `main.py` file in python.
 e.g. `python3 -m main`
 
 ### Run tests
-Execute the following command in the project directory: `python -m unittest`
+Execute the following command in the project directory: `python3 -m unittest`
 
 ## Have fun!
