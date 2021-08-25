@@ -20,7 +20,7 @@ class InputParser:
         while ask_for_input:
             row = int(
                 input(
-                    f"Please enter the row of the square you would like to move. Rows are from 0 to {self._n_board_rows-1}, starting with 0 as the top row."
+                    f"Please enter the row of the square you would like to move. Rows are from 0 to {self._n_board_rows-1}, starting with 0 as the top row.\nRow: "
                 )
             )
 
@@ -35,7 +35,7 @@ class InputParser:
         while ask_for_input:
             col = int(
                 input(
-                    f"Please enter the column of the square you would like to move. columns are from 0 to {self._n_board_cols-1}, starting with 0 as the top column."
+                    f"Please enter the column of the square you would like to move. Columns are from 0 to {self._n_board_cols-1}, starting with 0 as the top column.\nColumn: "
                 )
             )
 
