@@ -6,19 +6,21 @@ import numpy as np
 import random
 
 
-class SquarePuzzleBoard:
+class PuzzleBoard:
     """
     Note that 0 is used to indicate the blank square
     """
 
-    def __init__(self, board_side_length: int, num_shuffle_moves: int = 100):
+    def __init__(self, rows: int, cols: int, num_shuffle_moves: int = 3):
         """
         Build board with squares in a random solvable starting position
-        :param n: int, board side length in squares
+        :param rows: int, number of board rows
+        :param cols: int, number of board columns
         :param num_shuffle_moves: int, number of moves to shuffle initial board by
         :return:
         """
-        self.board_side_length = board_side_length
+        self.rows = rows
+        self.cols = cols
         self._num_shuffle_moves = num_shuffle_moves
         self._solution_board = self.create_solution_board()
         self._max_char_len = len(str(self._solution_board.max()))
@@ -31,8 +33,8 @@ class SquarePuzzleBoard:
                 indicate the empty square
         """
         return np.array(
-            [i for i in range(1, self.board_side_length ** 2)] + [0]
-        ).reshape((self.board_side_length, -1))
+            [i for i in range(1, self.rows * self.cols)] + [0]
+        ).reshape((self.rows, -1))
 
     def create_starting_board(self):
         """
@@ -77,13 +79,13 @@ class SquarePuzzleBoard:
         if empty_row > 0:
             down_move = (empty_row - 1, empty_col)
             valid_moves.append(down_move)
-        if empty_row < self.board_side_length - 1:
+        if empty_row < self.rows - 1:
             up_move = (empty_row + 1, empty_col)
             valid_moves.append(up_move)
         if empty_col > 0:
             right_move = (empty_row, empty_col - 1)
             valid_moves.append(right_move)
-        if empty_col < self.board_side_length - 1:
+        if empty_col < self.cols - 1:
             left_move = (empty_row, empty_col + 1)
             valid_moves.append(left_move)
 
@@ -103,10 +105,10 @@ class SquarePuzzleBoard:
         """
         board_str = ""
         board_str += (
-            " " + (self._max_char_len + 3) * self.board_side_length * "-" + "-\n"
+            " " + (self._max_char_len + 3) * self.cols * "-" + "-\n"
         )
-        for i in range(self.board_side_length):
-            for j in range(self.board_side_length):
+        for i in range(self.rows):
+            for j in range(self.cols):
                 board_str += " | " + (
                     str(self._square_positions[i, j]).rjust(self._max_char_len)
                     if self._square_positions[i, j] != 0
@@ -114,6 +116,6 @@ class SquarePuzzleBoard:
                 )
             board_str += " |\n"
             board_str += (
-                " " + (self._max_char_len + 3) * self.board_side_length * "-" + "-\n"
+                " " + (self._max_char_len + 3) * self.cols * "-" + "-\n"
             )
         print(board_str)

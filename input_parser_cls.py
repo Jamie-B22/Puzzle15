@@ -27,8 +27,8 @@ class InputParser:
         """
         ask_for_input = True
         while ask_for_input:
-            num, valid = self._get_and_validate_input(type, dimension_size)
-            ask_for_input = ~valid
+            num, valid = self._get_and_validate_int_input(type, dimension_size)
+            ask_for_input = not valid
         return int(num)
 
     @staticmethod
