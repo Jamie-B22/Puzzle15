@@ -5,9 +5,9 @@
 
 import unittest
 from main import create_game
-from board_cls import PuzzleBoard
-from input_parser_cls import InputParser
-from game_cls import PuzzleGame
+from classes.board_cls import PuzzleBoard
+from classes.input_parser_cls import InputParser
+from classes.game_cls import PuzzleGame
 
 
 class TestPuzzleGame(unittest.TestCase):

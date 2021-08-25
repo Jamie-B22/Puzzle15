@@ -5,7 +5,7 @@
 
 import unittest
 import builtins
-from input_parser_cls import InputParser
+from classes.input_parser_cls import InputParser
 from contextlib import contextmanager
 
 
@@ -19,7 +19,7 @@ def mockRawInput(mock):
 
 class TestInputParser(unittest.TestCase):
     def test_init(self):
-        parser = InputParser(3,4)
+        parser = InputParser(3, 4)
         self.assertEqual(parser._n_board_rows, 3)
         self.assertEqual(parser._n_board_cols, 4)
 

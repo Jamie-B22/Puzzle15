@@ -3,9 +3,10 @@
     main script for running Puzzle15 game.
 """
 from config import SQUARE_BOARD_SIDE_LENGTH
-from board_cls import PuzzleBoard
-from input_parser_cls import InputParser
-from game_cls import PuzzleGame
+from classes.board_cls import PuzzleBoard
+from classes.input_parser_cls import InputParser
+from classes.game_cls import PuzzleGame
+
 
 def create_game() -> PuzzleGame:
     board = PuzzleBoard(SQUARE_BOARD_SIDE_LENGTH, SQUARE_BOARD_SIDE_LENGTH)

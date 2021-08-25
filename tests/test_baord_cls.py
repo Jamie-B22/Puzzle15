@@ -6,14 +6,13 @@
 import unittest
 import numpy as np
 import random
-from board_cls import PuzzleBoard
-
+from classes.board_cls import PuzzleBoard
 
 
 class TestSquarePuzzleBoard(unittest.TestCase):
     def test_init(self):
         for n in [3, 4, 5, 6, 100, 238]:
-            m = random.randint(1, 2*n)
+            m = random.randint(1, 2 * n)
             board = PuzzleBoard(n, m, 2 * n)
             self.assertEqual(board.rows, n)
             self.assertEqual(board.cols, m)

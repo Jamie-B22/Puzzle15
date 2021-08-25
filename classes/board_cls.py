@@ -32,9 +32,9 @@ class PuzzleBoard:
         :return: n by n dimensional np.array with numbers in order from 1 to n**2 - 1 and the last element being 0 to
                 indicate the empty square
         """
-        return np.array(
-            [i for i in range(1, self.rows * self.cols)] + [0]
-        ).reshape((self.rows, -1))
+        return np.array([i for i in range(1, self.rows * self.cols)] + [0]).reshape(
+            (self.rows, -1)
+        )
 
     def create_starting_board(self):
         """
@@ -104,9 +104,7 @@ class PuzzleBoard:
         :return:
         """
         board_str = ""
-        board_str += (
-            " " + (self._max_char_len + 3) * self.cols * "-" + "-\n"
-        )
+        board_str += " " + (self._max_char_len + 3) * self.cols * "-" + "-\n"
         for i in range(self.rows):
             for j in range(self.cols):
                 board_str += " | " + (
@@ -115,7 +113,5 @@ class PuzzleBoard:
                     else self._max_char_len * " "
                 )
             board_str += " |\n"
-            board_str += (
-                " " + (self._max_char_len + 3) * self.cols * "-" + "-\n"
-            )
+            board_str += " " + (self._max_char_len + 3) * self.cols * "-" + "-\n"
         print(board_str)
