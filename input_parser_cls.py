@@ -18,7 +18,6 @@ class InputParser:
         col = self._get_valid_int_input("column", self._n_board_cols)
         return row, col
 
-
     def _get_valid_int_input(self, type: str, dimension_size: int) -> int:
         """
         Takes a type string to inform the user in the input message and returns a valid integer from user input
@@ -28,14 +27,27 @@ class InputParser:
         """
         ask_for_input = True
         while ask_for_input:
-            num = input(
-                    f"Please enter the {type} of the square you would like to move. {type.title()}s are from 0 to {dimension_size - 1}, starting from top left.\n{type}: "
-                )
-            if not num.isnumeric():
-                # check first and separately to prevent an exception being thrown on int() type conversion
-                print(f"Please enter a valid {type}.")
-            elif int(num) >= dimension_size or int(num) < 0:
-                print(f"Please enter a valid {type}.")
-            else:
-                ask_for_input = False
+            num, valid = self._get_and_validate_input(type, dimension_size)
+            ask_for_input = ~valid
         return int(num)
+
+    @staticmethod
+    def _get_and_validate_int_input(type: str, dimension_size: int) -> tuple:
+        """
+        Splits out the validation step and from the while loop for testing reasons
+        :param type: string of value 'row' or 'column'
+        :param dimension_size: number of possible integers to give an upper limit
+        :return: tuple of user input and validation bool
+        """
+        valid = False
+        num = input(
+            f"Please enter the {type} of the square you would like to move. {type.title()}s are from 0 to {dimension_size - 1}, starting from top left.\n{type}: "
+        )
+        if not num.isnumeric():
+            # check first and separately to prevent an exception being thrown on int() type conversion
+            print(f"Please enter a valid {type}.")
+        elif int(num) >= dimension_size or int(num) < 0:
+            print(f"Please enter a valid {type}.")
+        else:
+            valid = True
+        return num, valid

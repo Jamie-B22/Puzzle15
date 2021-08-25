@@ -64,7 +64,7 @@ class SquarePuzzleBoard:
 
         else:
             print(
-                f"Invalid move, please choose from these valid squares to move:\n{self.valid_moves()}"
+                f"\nInvalid move, please choose from these valid squares to move:\n{self.valid_moves()}"
             )
 
     def valid_moves(self) -> list:

@@ -12,7 +12,13 @@ from board_cls import SquarePuzzleBoard
 
 class TestSquarePuzzleBoard(unittest.TestCase):
     def test_init(self):
-        pass  # TODO: implement
+        for n in [3, 4, 5, 6, 100, 238]:
+            board = SquarePuzzleBoard(n, 2 * n)
+            self.assertEqual(board.board_side_length, n)
+            self.assertEqual(board._num_shuffle_moves, 2 * n)
+            self.assertEqual(board._solution_board.shape, (n, n))
+            self.assertEqual(board._max_char_len, len(str(n ** 2 - 1)))
+            self.assertEqual(board._square_positions.shape, (n, n))
 
     def test_valid_moves(self):
         n = 4
