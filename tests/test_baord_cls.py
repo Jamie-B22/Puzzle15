@@ -5,23 +5,27 @@
 
 import unittest
 import numpy as np
-from board_cls import SquarePuzzleBoard
+import random
+from board_cls import PuzzleBoard
 
 
 
 class TestSquarePuzzleBoard(unittest.TestCase):
     def test_init(self):
         for n in [3, 4, 5, 6, 100, 238]:
-            board = SquarePuzzleBoard(n, 2 * n)
-            self.assertEqual(board.board_side_length, n)
+            m = random.randint(1, 2*n)
+            board = PuzzleBoard(n, m, 2 * n)
+            self.assertEqual(board.rows, n)
+            self.assertEqual(board.cols, m)
             self.assertEqual(board._num_shuffle_moves, 2 * n)
-            self.assertEqual(board._solution_board.shape, (n, n))
-            self.assertEqual(board._max_char_len, len(str(n ** 2 - 1)))
-            self.assertEqual(board._square_positions.shape, (n, n))
+            self.assertEqual(board._solution_board.shape, (n, m))
+            self.assertEqual(board._max_char_len, len(str(n * m - 1)))
+            self.assertEqual(board._square_positions.shape, (n, m))
 
     def test_valid_moves(self):
         n = 4
-        board = SquarePuzzleBoard(n)
+        m = n
+        board = PuzzleBoard(n, m)
         board._square_positions = np.array(
             [i for i in range(1, n + 1)] + [0] + [i for i in range(n + 1, n ** 2)]
         ).reshape((n, -1))
@@ -40,13 +44,13 @@ class TestSquarePuzzleBoard(unittest.TestCase):
     def test_create_solution_board(self):
         for n in [2, 3, 4, 5, 6, 10, 178]:
             solution = np.array([i for i in range(1, n ** 2)] + [0]).reshape((n, -1))
-            board = SquarePuzzleBoard(n)
+            board = PuzzleBoard(n, n)
             self.assertTrue(np.all(board._solution_board == solution))
 
     def test_check_board_solved_true(self):
         for n in [2, 3, 4, 267, 9]:
             solution = np.array([i for i in range(1, n ** 2)] + [0]).reshape((n, -1))
-            board = SquarePuzzleBoard(n)
+            board = PuzzleBoard(n, n)
             board._square_positions = solution
             self.assertTrue(board.check_board_solved())
 
@@ -55,13 +59,14 @@ class TestSquarePuzzleBoard(unittest.TestCase):
             not_solution = np.array(
                 [i for i in range(1, n + 1)] + [0] + [i for i in range(n + 1, n ** 2)]
             ).reshape((n, -1))
-            board = SquarePuzzleBoard(n)
+            board = PuzzleBoard(n, n)
             board._square_positions = not_solution
             self.assertFalse(board.check_board_solved())
 
-    def test_move_valid_move(self):
+    def test_make_move(self):
         n = 4
-        board = SquarePuzzleBoard(n)
+        m = n
+        board = PuzzleBoard(n, m)
         board._square_positions = np.array(
             [[1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12], [13, 14, 15, 0]]
         )

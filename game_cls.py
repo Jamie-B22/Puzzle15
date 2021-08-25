@@ -20,10 +20,10 @@ class PuzzleGame:
         :return:
         """
         print(
-            f"Welcome to the Puzzle{self.board.board_side_length**2 - 1} board challenge!\n"
+            f"Welcome to the Puzzle{self.board.rows*self.board.cols - 1} board challenge!\n"
         )
         print(
-            f"You will see a board below with {self.board.board_side_length**2} squares containing numbers 1 to {self.board.board_side_length**2 - 1} and an empty square, all randomly mixed."
+            f"You will see a board below with {self.board.rows*self.board.cols**2} squares containing numbers 1 to {self.board.rows*self.board.cols - 1} and an empty square, all randomly mixed."
         )
         print(
             "Your task is to slide adjacent squares into the empty square until you end up with the numbers in order, left to right, top to bottom with the empty square in the bottom right.\n"
